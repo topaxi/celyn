@@ -43,6 +43,7 @@
     "ember-load-initializers": "^0.5.1",
     "ember-pouch": "4.0.2",
     "ember-resolver": "^2.0.3",
+    "flexi": "1.2.0",
     "liquid-fire": "^0.26.4",
     "loader.js": "^4.0.1",
     "material-design-icons": "^3.0.1",

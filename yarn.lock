@@ -2066,6 +2066,19 @@ ember-cli-preprocess-registry@^2.0.0:
     process-relative-require "^1.0.0"
     silent-error "^1.0.0"
 
+ember-cli-preprocess-registry@^3.0.0:
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/ember-cli-preprocess-registry/-/ember-cli-preprocess-registry-3.0.0.tgz#5a7e6a4048a895856c8a54ed145cf92153b2ab96"
+  dependencies:
+    broccoli-clean-css "^1.1.0"
+    broccoli-funnel "^1.0.0"
+    broccoli-merge-trees "^1.0.0"
+    debug "^2.2.0"
+    exists-sync "0.0.3"
+    lodash "^4.5.0"
+    process-relative-require "^1.0.0"
+    silent-error "^1.0.0"
+
 ember-cli-qunit@^2.1.0:
   version "2.2.3"
   resolved "https://registry.yarnpkg.com/ember-cli-qunit/-/ember-cli-qunit-2.2.3.tgz#b73bb36c2887261ec38137ce4694add9688891ec"
@@ -2095,6 +2108,17 @@ ember-cli-release@^0.2.9:
     rsvp "^3.0.17"
     semver "^4.3.1"
     silent-error "^1.0.0"
+
+ember-cli-sass@^5.3.1:
+  version "5.6.0"
+  resolved "https://registry.yarnpkg.com/ember-cli-sass/-/ember-cli-sass-5.6.0.tgz#792de67544bb903eef421a3e59c484840fea5352"
+  dependencies:
+    broccoli-funnel "^1.0.0"
+    broccoli-merge-trees "^1.1.0"
+    broccoli-sass-source-maps "^1.8.0"
+    ember-cli-babel "5.1.10"
+    ember-cli-version-checker "^1.0.2"
+    merge "^1.2.0"
 
 ember-cli-sass@5.5.2:
   version "5.5.2"
@@ -2364,7 +2388,7 @@ ember-export-application-global@^1.0.5:
   dependencies:
     ember-cli-babel "^5.1.10"
 
-ember-getowner-polyfill@^1.0.0:
+ember-getowner-polyfill@^1.0.0, ember-getowner-polyfill@^1.0.1:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/ember-getowner-polyfill/-/ember-getowner-polyfill-1.0.1.tgz#f60a31d25d642461dac4b4746184afaf7f5084ae"
   dependencies:
@@ -2778,6 +2802,23 @@ fireworm@^0.7.0:
     lodash.debounce "^3.1.1"
     lodash.flatten "^3.0.2"
     minimatch "^3.0.2"
+
+flexi@1.2.0:
+  version "1.2.0"
+  resolved "https://registry.yarnpkg.com/flexi/-/flexi-1.2.0.tgz#b03ccb23a11fbb33b6f68624f5f4c82bf29ee9a5"
+  dependencies:
+    broccoli-funnel "^1.0.1"
+    broccoli-merge-trees "^1.1.1"
+    broccoli-plugin "^1.2.1"
+    chalk "^1.1.1"
+    debug "^2.2.0"
+    ember-cli-babel "^5.1.6"
+    ember-cli-htmlbars "^1.0.3"
+    ember-cli-preprocess-registry "^3.0.0"
+    ember-cli-sass "^5.3.1"
+    ember-getowner-polyfill "^1.0.1"
+    object-assign "^4.0.1"
+    rsvp "^3.2.0"
 
 foreach@^2.0.5:
   version "2.0.5"
@@ -4021,7 +4062,7 @@ lodash@^3.10.0, lodash@^3.10.1, lodash@^3.5.0, lodash@^3.9.3:
   version "3.10.1"
   resolved "https://registry.yarnpkg.com/lodash/-/lodash-3.10.1.tgz#5bf45e8e49ba4189e17d482789dfd15bd140b7b6"
 
-lodash@^4.0.0, lodash@^4.12.0, lodash@^4.13.1, lodash@^4.3.0, lodash@^4.6.1, lodash@^4.8.0:
+lodash@^4.0.0, lodash@^4.12.0, lodash@^4.13.1, lodash@^4.3.0, lodash@^4.5.0, lodash@^4.6.1, lodash@^4.8.0:
   version "4.16.4"
   resolved "https://registry.yarnpkg.com/lodash/-/lodash-4.16.4.tgz#01ce306b9bad1319f2a5528674f88297aeb70127"
 
@@ -5565,7 +5606,7 @@ ripemd160@^1.0.0:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/ripemd160/-/ripemd160-1.0.1.tgz#93a4bbd4942bc574b69a8fa57c71de10ecca7d6e"
 
-rsvp@^3.0.14, rsvp@^3.0.16, rsvp@^3.0.17, rsvp@^3.0.18, rsvp@^3.0.21, rsvp@^3.0.6, rsvp@^3.1.0, rsvp@^3.2.1:
+rsvp@^3.0.14, rsvp@^3.0.16, rsvp@^3.0.17, rsvp@^3.0.18, rsvp@^3.0.21, rsvp@^3.0.6, rsvp@^3.1.0, rsvp@^3.2.0, rsvp@^3.2.1:
   version "3.3.3"
   resolved "https://registry.yarnpkg.com/rsvp/-/rsvp-3.3.3.tgz#34633caaf8bc66ceff4be3c2e1dffd032538a813"
 
