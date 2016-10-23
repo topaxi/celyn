@@ -1,0 +1,63 @@
+$color-body: #1c1c1c;
+$color-text: #eeeeec;
+$color-primary: #438ece;
+$color-secondary: #6abd3f;
+$color-danger: #c63d2d;
+$color-warning: #d4a626;
+$color-content: #333;
+$color-separator: #444;
+
+$text-shadow-color: rgba(17, 17, 17, 0.75);
+
+:root {
+  --color-body: $color-body;
+  --color-text: $color-text;
+  --color-primary: $color-primary;
+  --color-secondary: $color-secondary;
+  --color-danger: $color-danger;
+  --color-warning: $color-warning;
+  --color-content: $color-content;
+  --color-separator: $color-separator;
+
+  font-family: Roboto, sans-serif;
+  color: var(--color-text);
+  text-shadow: 0 1px 1px $text-shadow-color;
+
+  background-color: var(--color-body);
+}
+
+body > .ember-view {
+  display: flex;
+}
+
+.box {
+  width: 100px;
+  height: 100px;
+  margin: 5px;
+  background: white;
+  border: 1px solid var(--color-separator);
+}
+
+.primary {
+  background-color: var(--color-primary);
+}
+
+.secondary {
+  background-color: var(--color-secondary);
+}
+
+.danger {
+  background-color: var(--color-danger);
+}
+
+.warning {
+  background-color: var(--color-warning);
+}
+
+.content {
+  background-color: var(--color-content);
+}
+
+.separator {
+  background-color: var(--color-separator);
+}
