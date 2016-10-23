@@ -7,8 +7,6 @@ $color-warning: #d4a626;
 $color-content: #333;
 $color-separator: #444;
 
-$text-shadow-color: rgba(17, 17, 17, 0.75);
-
 :root {
   --color-body: $color-body;
   --color-text: $color-text;
@@ -21,7 +19,6 @@ $text-shadow-color: rgba(17, 17, 17, 0.75);
 
   font-family: Roboto, sans-serif;
   color: var(--color-text);
-  text-shadow: 0 1px 1px $text-shadow-color;
 
   background-color: var(--color-body);
 }
