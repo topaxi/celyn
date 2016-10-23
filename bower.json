@@ -4,7 +4,7 @@
     "ember": "~2.8.0",
     "ember-cli-shims": "0.1.1",
     "pouchdb": "^6.0.7",
-    "relational-pouch": "^1.4.4",
-    "pouchdb-find": "^0.10.3"
+    "pouchdb-find": "^0.10.3",
+    "relational-pouch": "^1.4.4"
   }
 }

@@ -1,0 +1,16 @@
+.toolbar-tools {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  font-size: 20px;
+  height: 56px;
+  padding: 0 1rem;
+  font-weight: 400;
+}
+
+.toolbar h1 {
+  font-size: inherit;
+  font-weight: inherit;
+  margin: inherit;
+  line-height: 40px;
+}

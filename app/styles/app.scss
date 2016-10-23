@@ -1,35 +1,30 @@
-$color-body: #1c1c1c;
-$color-text: #eeeeec;
-$color-primary: #438ece;
-$color-secondary: #6abd3f;
-$color-danger: #c63d2d;
-$color-warning: #d4a626;
-$color-content: #333;
-$color-separator: #444;
+@import 'variables';
+@import 'components/md-icon';
+@import 'components/button';
+@import 'components/toolbar';
 
 :root {
-  --color-body: $color-body;
-  --color-text: $color-text;
-  --color-primary: $color-primary;
-  --color-secondary: $color-secondary;
-  --color-danger: $color-danger;
-  --color-warning: $color-warning;
-  --color-content: $color-content;
-  --color-separator: $color-separator;
-
   font-family: Roboto, sans-serif;
   color: var(--color-text);
 
   background-color: var(--color-body);
 }
 
+body {
+  margin: 0;
+}
+
+main {
+  margin: 0 1rem;
+}
+
 body > .ember-view {
   display: flex;
+  flex-direction: column;
 }
 
 .box {
-  width: 100px;
-  height: 100px;
+  height: 50px;
   margin: 5px;
   background: white;
   border: 1px solid var(--color-separator);

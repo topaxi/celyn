@@ -1,0 +1,12 @@
+@import 'material-icons';
+
+md-icon[size="18"] { font-size: 18px }
+md-icon[size="24"] { font-size: 24px }
+md-icon[size="36"] { font-size: 36px }
+md-icon[size="48"] { font-size: 48px }
+
+md-icon[dark]           { color: rgba(0, 0, 0, 0.54) }
+md-icon[dark][inactive] { color: rgba(0, 0, 0, 0.26) }
+
+md-icon[light]           { color: rgba(255, 255, 255, 1) }
+md-icon[light][inactive] { color: rgba(255, 255, 255, 0.3) }

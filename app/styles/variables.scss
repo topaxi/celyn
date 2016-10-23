@@ -1,0 +1,19 @@
+$color-body: #1c1c1c;
+$color-text: #eeeeec;
+$color-primary: #438ece;
+$color-secondary: #6abd3f;
+$color-danger: #c63d2d;
+$color-warning: #d4a626;
+$color-content: #333;
+$color-separator: #444;
+
+:root {
+  --color-body: $color-body;
+  --color-text: $color-text;
+  --color-primary: $color-primary;
+  --color-secondary: $color-secondary;
+  --color-danger: $color-danger;
+  --color-warning: $color-warning;
+  --color-content: $color-content;
+  --color-separator: $color-separator;
+}
