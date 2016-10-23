@@ -1,0 +1,32 @@
+celyn-player {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  --cover-size: 36px;
+}
+
+.celyn-player-cover {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--color-separator);
+  width: var(--cover-size);
+  height: var(--cover-size);
+  margin: 0.5rem;
+}
+
+.celyn-player-track {
+  flex: 1;
+  font-size: 0.9rem;
+}
+
+.celyn-player-artist {
+  font-size: 0.75em;
+}
+
+.celyn-player-controls {
+  margin-right: 1rem;
+  display: flex;
+  justify-content: space-between;
+  width: 120px;
+}

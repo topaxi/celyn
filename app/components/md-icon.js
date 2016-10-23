@@ -9,8 +9,10 @@ const {
 const MdIcon = Component.extend({
   tagName: 'md-icon',
   classNames: [ 'material-icons' ],
-  attributeBindings: [ 'dark', 'light', 'size' ],
+  attributeBindings: [ 'dark', 'light', 'size', 'inactive' ],
   positionalIcon: '',
+  light: true,
+  dark: false,
 
   icon: computed({
     get() {
