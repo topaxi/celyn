@@ -1,3 +1,7 @@
+.toolbar {
+  border-bottom: 1px solid var(--color-separator);
+}
+
 .toolbar-tools {
   display: flex;
   flex-direction: row;
