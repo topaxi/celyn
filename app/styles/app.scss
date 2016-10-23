@@ -19,7 +19,7 @@ body {
 }
 
 main {
-  margin: 0 1rem;
+  padding: 0 1rem;
   flex: 1;
   overflow-y: auto;
 }
@@ -45,7 +45,7 @@ body > .ember-view {
 
 .box {
   height: 50px;
-  margin: 5px;
+  margin: 5px 0;
   background: white;
   border: 1px solid var(--color-separator);
 }
