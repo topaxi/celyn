@@ -341,7 +341,7 @@ babel-plugin-feature-flags@^0.2.1:
   dependencies:
     json-stable-stringify "^1.0.1"
 
-babel-plugin-filter-imports@^0.2.0:
+babel-plugin-filter-imports@^0.2.0, babel-plugin-filter-imports@^0.2.1:
   version "0.2.1"
   resolved "https://registry.yarnpkg.com/babel-plugin-filter-imports/-/babel-plugin-filter-imports-0.2.1.tgz#784f96a892f2f7ed2ccf0955688bd8916cd2e212"
   dependencies:
@@ -402,6 +402,10 @@ babel-plugin-undeclared-variables-check@^1.0.2:
 babel-plugin-undefined-to-void@^1.1.6:
   version "1.1.6"
   resolved "https://registry.yarnpkg.com/babel-plugin-undefined-to-void/-/babel-plugin-undefined-to-void-1.1.6.tgz#7f578ef8b78dfae6003385d8417a61eda06e2f81"
+
+babel5-plugin-strip-class-callcheck@^5.1.0:
+  version "5.1.0"
+  resolved "https://registry.yarnpkg.com/babel5-plugin-strip-class-callcheck/-/babel5-plugin-strip-class-callcheck-5.1.0.tgz#77d4a40c8614d367b8a21a53908159806dba5f91"
 
 babylon@^5.8.38:
   version "5.8.38"
@@ -687,7 +691,7 @@ broccoli-filter@^1.2.2, broccoli-filter@^1.2.3:
     symlink-or-copy "^1.0.1"
     walk-sync "^0.3.1"
 
-broccoli-funnel, broccoli-funnel@^1.0.0, broccoli-funnel@^1.0.1, broccoli-funnel@^1.0.3:
+broccoli-funnel, broccoli-funnel@^1.0.0, broccoli-funnel@^1.0.1, broccoli-funnel@^1.0.3, broccoli-funnel@^1.0.7:
   version "1.0.7"
   resolved "https://registry.yarnpkg.com/broccoli-funnel/-/broccoli-funnel-1.0.7.tgz#d44eb55991cb365f2f6de450734ff467135953d2"
   dependencies:
@@ -4949,6 +4953,12 @@ pend@~1.2.0:
   version "1.2.0"
   resolved "https://registry.yarnpkg.com/pend/-/pend-1.2.0.tgz#7a57eb550a6783f9115331fcf4663d5c8e007a50"
 
+perf-primitives@0.0.4:
+  version "0.0.4"
+  resolved "https://registry.yarnpkg.com/perf-primitives/-/perf-primitives-0.0.4.tgz#f07e7f33ef3e200393aa218f591918fb3abe46e8"
+  dependencies:
+    ember-cli-babel "^5.1.6"
+
 phantomjs-prebuilt@^2.1.10, phantomjs-prebuilt@^2.1.12:
   version "2.1.13"
   resolved "https://registry.yarnpkg.com/phantomjs-prebuilt/-/phantomjs-prebuilt-2.1.13.tgz#66556ad9e965d893ca5a7dc9e763df7e8697f76d"
@@ -5747,6 +5757,19 @@ slash@^1.0.0:
 slide@^1.1.3, slide@^1.1.5, slide@~1.1.3, slide@~1.1.6:
   version "1.1.6"
   resolved "https://registry.yarnpkg.com/slide/-/slide-1.1.6.tgz#56eb027d65b4d2dce6cb2e2d32c4d4afc9e1d707"
+
+smoke-and-mirrors:
+  version "0.6.2"
+  resolved "https://registry.yarnpkg.com/smoke-and-mirrors/-/smoke-and-mirrors-0.6.2.tgz#9ff5ae3ee6d8212defca4ec9b91646026f117fe3"
+  dependencies:
+    babel-plugin-filter-imports "^0.2.1"
+    babel5-plugin-strip-class-callcheck "^5.1.0"
+    broccoli-funnel "^1.0.7"
+    chalk "^1.1.3"
+    ember-cli-babel "^5.1.6"
+    ember-cli-htmlbars "^1.0.3"
+    ember-getowner-polyfill "^1.0.0"
+    perf-primitives "0.0.4"
 
 sntp@0.2.x:
   version "0.2.4"
