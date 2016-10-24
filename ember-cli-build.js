@@ -3,7 +3,7 @@
 const EmberApp = require('ember-cli/lib/broccoli/ember-app')
 const Funnel = require('broccoli-funnel')
 
-const MATERIAL_ICONFONT = 'node_modules/material-design-icons/iconfont'
+const MATERIAL_ICONFONT = 'node_modules/material-design-icon-fonts/iconfont'
 
 module.exports = function(defaults) {
   let app = new EmberApp(defaults, {

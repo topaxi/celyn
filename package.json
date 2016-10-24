@@ -46,7 +46,7 @@
     "flexi": "1.2.0",
     "liquid-fire": "^0.26.4",
     "loader.js": "^4.0.1",
-    "material-design-icons": "^3.0.1",
+    "material-design-icon-fonts": "^3.0.1",
     "smoke-and-mirrors": "^0.6.2"
   }
 }
