@@ -6,5 +6,6 @@ export function initialize() {
 
 export default {
   name: 'mobile-statusbar',
+  after: 'deviceready',
   initialize
 }
