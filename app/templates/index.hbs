@@ -1,5 +1,11 @@
-<div class="box primary">Hello</div>
-<div class="box secondary">Hello</div>
-<div class="box danger">Hello</div>
-<div class="box warning">Hello</div>
-<div class="box content">Hello</div>
+{{#vertical-collection
+  class = "track-list"
+  content = model
+  defaultHeight = 48
+  alwaysRemeasure = true
+  as |track|}}
+  <div class="box primary">
+    <div>{{track.title}}</div>
+    <div><small>{{track.artist}}</small></div>
+  </div>
+{{/vertical-collection}}
