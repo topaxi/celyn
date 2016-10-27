@@ -6,10 +6,6 @@ const { Service } = Ember
 const { Promise } = RSVP
 
 export default Service.extend({
-  init() {
-    this.externalRootDirectory = cordova.file.externalRootDirectory
-  },
-
   blobToArrayBuffer(blob) {
     return new Promise(resolve => {
       let fr = new FileReader
@@ -26,7 +22,7 @@ export default Service.extend({
   },
 
   getExternalRootDir() {
-    return this.resolveLocalFileSystemURL(this.externalRootDirectory)
+    return this.resolveLocalFileSystemURL(cordova.file.externalRootDirectory)
   },
 
   readDir(entry) {
