@@ -1,10 +1,12 @@
+import Ember from 'ember'
 import DS from 'ember-data'
 import { Model } from 'ember-pouch'
 
 const { attr/* , belongsTo, hasMany */ } = DS
+const { computed } = Ember
 
 export default Model.extend({
-  url: attr('string'),
+  url: computed.oneWay('id'),
   duration: attr('number'),
 
   title: attr('string'),

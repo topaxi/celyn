@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import Ember from 'ember'
 
 const { Service, inject } = Ember
@@ -40,16 +41,13 @@ export default Service.extend({
            fileName.endsWith('.wma')
   },
 
-  syncLocalFiles() {
-    let audioMeta = this.get('audioMeta')
-    let t = performance.now()
+  syncLocalFiles(reindex) {
+    console.time('file sync')
 
     return this._getAllFiles()
       .then(files => this._filterAudioFiles(files))
-      .then(files =>
-        this._eachAudioMetaData(files, (f, meta) => this._syncTrack(f, meta))
-      )
-      .then(files => console.log((performance.now() - t) / 1000, files))
+      .then(files => forEachPromise(files, f => this._syncTrack(f, reindex)))
+      .then(() => console.timeEnd('file sync'))
   },
 
   _formatToMime(f) {
@@ -58,43 +56,74 @@ export default Service.extend({
         return 'image/jpeg'
       case 'png':
         return 'image/png'
+      case 'gif':
+        return 'image/gif'
       default:
         return ''
     }
   },
 
-  _syncTrack(f, meta) {
-    let store = this.get('store')
+  _syncTrack(fileEntry, force) {
+    console.time(fileEntry.nativeURL)
 
-    return store.queryRecord('track', { filter: { url: f.nativeURL } })
-      .then(track => {
-        if (track) {
-          return track
+    let id = fileEntry.nativeURL
+    let store = this.get('store')
+    let audioMeta = this.get('audioMeta')
+
+    return store.findRecord('track', id)
+      .catch(err => {
+        if (!err) {
+          // PouchDB probably found an empty record
+          console.warn('Something bad has happened. Got empty error, ' +
+                       'assuming record was not found')
+
+          // By returning null, we will recreate this record
+          return null
         }
 
-        return store.createRecord('track', {
-          url: f.nativeURL,
-          duration: meta.duration,
-          title: meta.title,
-          artist: meta.artist.join(', '),
-          album: meta.album,
-          albumArtist: meta.albumartist.join(', '),
-          genre: meta.genre.join(', '),
-          disk: meta.disk,
-          track: meta.track,
-          year: meta.year,
-          pictures: meta.picture.map(p => {
-            let type = this._formatToMime(p.format)
+        if (/Not found:/.test(err.toString())) {
+          return null
+        }
 
-            return {
-              name: `${meta.album}.${p.format}`,
-              content_type: type,
-              data: new Blob([ p.data ], { type })
-            }
-          })
-        })
-          .save()
+        throw err
       })
+      .then(_track => {
+        if (_track && !force) {
+          return _track
+        }
+
+        return audioMeta.readMetaData(fileEntry)
+          .then(meta => {
+            let track = _track
+
+            if (!track) {
+              track = store.createRecord('track', { id })
+            }
+
+            track.setProperties({
+              title: meta.title,
+              artist: meta.artist.join(', '),
+              album: meta.album,
+              albumArtist: meta.albumartist.join(', '),
+              genre: meta.genre.join(', '),
+              disk: meta.disk,
+              track: meta.track,
+              year: meta.year,
+              pictures: meta.picture.map(p => {
+                let type = this._formatToMime(p.format)
+
+                return {
+                  name: `${meta.album}.${p.format}`,
+                  content_type: type, // eslint-disable-line camelcase
+                  data: new Blob([ p.data ], { type })
+                }
+              })
+            })
+
+            return track.save()
+          })
+      })
+      .then(() => console.timeEnd(fileEntry.nativeURL))
   },
 
   _eachAudioMetaData(files, callback) {
