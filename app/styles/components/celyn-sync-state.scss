@@ -1,0 +1,18 @@
+celyn-sync-state {
+  height: 2.5em;
+}
+
+celyn-sync-state .processed {
+  margin-left: 0.25em;
+}
+
+celyn-sync-state .separator::before {
+  content: ' of ';
+  margin: 0 0.25em;
+}
+
+celyn-sync-state .current-file {
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+}

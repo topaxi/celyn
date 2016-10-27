@@ -1,7 +1,9 @@
 /* eslint-disable no-console */
 import Ember from 'ember'
+import RSVP from 'rsvp'
 
 const { Service, inject } = Ember
+const { Promise } = RSVP
 
 function forEachPromise(array, callback) {
   return array.reduce(
@@ -29,6 +31,11 @@ export default Service.extend({
   audioMeta: inject.service(),
   store: inject.service(),
 
+  isSyncing: false,
+  syncTotal: 0,
+  syncProcessed: 0,
+  syncCurrentFile: '',
+
   _isAudioFile(fileName) {
     return fileName.endsWith('.mp3') ||
            fileName.endsWith('.m4a') ||
@@ -38,11 +45,20 @@ export default Service.extend({
   },
 
   syncLocalFiles(reindex) {
+    this.set('isSyncing', true)
     console.time('file sync')
 
     let syncState = Promise.all([
       this._getAllFiles()
-        .then(files => this._filterAudioFiles(files)),
+        .then(files => this._filterAudioFiles(files))
+        .then(files => {
+          this.setProperties({
+            syncTotal: files.length,
+            syncProcessed: 0
+          })
+
+          return files
+        }),
       this.get('store').findAll('track')
     ])
 
@@ -50,6 +66,7 @@ export default Service.extend({
       .then(([ files ]) => files)
       .then(files => forEachPromise(files, f => this._syncTrack(f, reindex)))
       .then(() => console.timeEnd('file sync'))
+      .finally(() => this.set('isSyncing', false))
   },
 
   _formatToMime(f) {
@@ -68,14 +85,21 @@ export default Service.extend({
   _syncTrack(fileEntry, force) {
     console.time(fileEntry.nativeURL)
 
+    this.set('syncCurrentFile', fileEntry.name)
+
     let id = fileEntry.nativeURL
     let store = this.get('store')
     let audioMeta = this.get('audioMeta')
 
     let track = store.peekRecord('track', id)
 
-    if (track && !force) {
+    let done = () => {
+      this.set('syncProcessed', this.get('syncProcessed') + 1)
       console.timeEnd(fileEntry.nativeURL)
+    }
+
+    if (track && !force) {
+      done()
 
       return track
     }
@@ -108,7 +132,7 @@ export default Service.extend({
 
         return track.save()
       })
-      .then(() => console.timeEnd(fileEntry.nativeURL))
+      .then(() => done())
   },
 
   _eachAudioMetaData(files, callback) {

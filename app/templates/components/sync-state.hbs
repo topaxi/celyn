@@ -1,0 +1,20 @@
+{{#if hasBlock}}
+  {{yield
+    (hash
+      isSyncing = sync.isSyncing
+      total = sync.syncTotal
+      processed = sync.syncProcessed
+      currentFile = sync.syncCurrentFile
+      )
+    }}
+{{else if sync.isSyncing}}
+  <celyn-sync-state class="layout-column">
+    <div class="progress layout-row">
+      <span>Syncing:</span>
+      <span class="processed">{{sync.syncProcessed}}</span>
+      <span class="separator"></span>
+      <span class="total">{{sync.syncTotal}}</span>
+    </div>
+    <div class="current-file">{{sync.syncCurrentFile}}</div>
+  </celyn-sync-state>
+{{/if}}

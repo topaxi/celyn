@@ -5,6 +5,16 @@
   </div>
 </div>
 
-<main role="main">{{liquid-outlet class="application-outlet"}}</main>
+<div class="notification-bar">
+  {{~#liquid-spacer~}}
+    <div class="notification-bar-content">{{~sync-state~}}</div>
+  {{~/liquid-spacer~}}
+</div>
 
-<footer class="celyn-footer">{{celyn-player}}</footer>
+<main role="main">
+  {{~liquid-outlet class="application-outlet"~}}
+</main>
+
+<footer class="celyn-footer">
+  {{~celyn-player~}}
+</footer>
