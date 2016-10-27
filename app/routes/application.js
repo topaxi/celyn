@@ -16,9 +16,5 @@ export default Route.extend({
       .then(() => {
         this.get('sync').syncLocalFiles()
       })
-  },
-
-  model() {
-    return this.store.findAll('track')
   }
 })
