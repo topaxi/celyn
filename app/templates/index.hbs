@@ -1,11 +1,10 @@
 {{#vertical-collection
-  class = "track-list"
-  content = model
+  class = "track-list flex"
+  items = model
+  itemClassNames = "box primary"
   defaultHeight = 48
   alwaysRemeasure = true
   as |track|}}
-  <div class="box primary">
-    <div>{{track.title}}</div>
-    <div><small>{{track.artist}}</small></div>
-  </div>
+  <div>{{track.title}}</div>
+  <div><small>{{track.artist}}</small></div>
 {{/vertical-collection}}

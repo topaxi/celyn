@@ -1,4 +1,5 @@
 @import 'variables';
+@import 'layout';
 @import 'components/md-icon';
 @import 'components/button';
 @import 'components/toolbar';
@@ -19,9 +20,23 @@ body {
 }
 
 main {
-  padding: 1rem;
   flex: 1;
   overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+}
+
+.application-outlet {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.application-outlet > .liquid-child {
+  flex: 1;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
 }
 
 .celyn-footer {
@@ -71,13 +86,4 @@ body > .ember-view {
 
 .separator {
   background-color: var(--color-separator);
-}
-
-.track-list > vertical-item {
-  display: flex;
-  flex-direction: column;
-}
-
-.track-list > vertical-item > .box {
-  flex: 1;
 }

@@ -1,10 +1,10 @@
 <div class="toolbar">
   <div class="toolbar-tools">
-    <button class="button button-icon">{{md-icon 'menu' light=true}}</button>
-    <h1>Celyn Music {{md-icon 'music note'}}</h1>
+    <button class="button button-icon">{{md-icon "menu" light=true}}</button>
+    <h1>Celyn Music {{md-icon "music note"}}</h1>
   </div>
 </div>
 
-<main role="main">{{outlet}}</main>
+<main role="main">{{liquid-outlet class="application-outlet"}}</main>
 
 <footer class="celyn-footer">{{celyn-player}}</footer>
