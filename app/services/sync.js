@@ -77,8 +77,14 @@ export default Service.extend({
           console.warn('Something bad has happened. Got empty error, ' +
                        'assuming record was not found')
 
+          // By returning an empty object, we ignore this record for now...
+          return {}
+
+          // TODO: Remove object from store and return null
+          // db.get(id).then(doc => db.remove(doc))
+
           // By returning null, we will recreate this record
-          return null
+          // return null
         }
 
         if (/Not found:/.test(err.toString())) {
