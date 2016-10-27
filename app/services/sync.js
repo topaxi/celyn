@@ -44,8 +44,14 @@ export default Service.extend({
   syncLocalFiles(reindex) {
     console.time('file sync')
 
-    return this._getAllFiles()
-      .then(files => this._filterAudioFiles(files))
+    let syncState = Promise.all([
+      this._getAllFiles()
+        .then(files => this._filterAudioFiles(files)),
+      this.get('store').findAll('track')
+    ])
+
+    return syncState
+      .then(([ files ]) => files)
       .then(files => forEachPromise(files, f => this._syncTrack(f, reindex)))
       .then(() => console.timeEnd('file sync'))
   },
@@ -70,64 +76,41 @@ export default Service.extend({
     let store = this.get('store')
     let audioMeta = this.get('audioMeta')
 
-    return store.findRecord('track', id)
-      .catch(err => {
-        if (!err) {
-          // PouchDB probably found an empty record
-          console.warn('Something bad has happened. Got empty error, ' +
-                       'assuming record was not found')
+    let track = store.peekRecord('track', id)
 
-          // By returning an empty object, we ignore this record for now...
-          return {}
+    if (track && !force) {
+      console.timeEnd(fileEntry.nativeURL)
 
-          // TODO: Remove object from store and return null
-          // db.get(id).then(doc => db.remove(doc))
+      return track
+    }
 
-          // By returning null, we will recreate this record
-          // return null
+    return audioMeta.readMetaData(fileEntry)
+      .then(meta => {
+        if (!track) {
+          track = store.createRecord('track', { id })
         }
 
-        if (/Not found:/.test(err.toString())) {
-          return null
-        }
+        track.setProperties({
+          title: meta.title,
+          artist: meta.artist.join(', '),
+          album: meta.album,
+          albumArtist: meta.albumartist.join(', '),
+          genre: meta.genre.join(', '),
+          disk: meta.disk,
+          track: meta.track,
+          year: meta.year,
+          pictures: meta.picture.map(p => {
+            let type = this._formatToMime(p.format)
 
-        throw err
-      })
-      .then(_track => {
-        if (_track && !force) {
-          return _track
-        }
-
-        return audioMeta.readMetaData(fileEntry)
-          .then(meta => {
-            let track = _track
-
-            if (!track) {
-              track = store.createRecord('track', { id })
+            return {
+              name: `${meta.album}.${p.format}`,
+              content_type: type, // eslint-disable-line camelcase
+              data: new Blob([ p.data ], { type })
             }
-
-            track.setProperties({
-              title: meta.title,
-              artist: meta.artist.join(', '),
-              album: meta.album,
-              albumArtist: meta.albumartist.join(', '),
-              genre: meta.genre.join(', '),
-              disk: meta.disk,
-              track: meta.track,
-              year: meta.year,
-              pictures: meta.picture.map(p => {
-                let type = this._formatToMime(p.format)
-
-                return {
-                  name: `${meta.album}.${p.format}`,
-                  content_type: type, // eslint-disable-line camelcase
-                  data: new Blob([ p.data ], { type })
-                }
-              })
-            })
-
-            return track.save()
           })
+        })
+
+        return track.save()
       })
       .then(() => console.timeEnd(fileEntry.nativeURL))
   },
