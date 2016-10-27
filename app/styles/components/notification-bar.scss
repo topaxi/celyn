@@ -1,3 +1,7 @@
+.notification-bar-content {
+  position: relative;
+}
+
 .notification-bar-content:not(:empty) {
   padding: 0.5rem 1rem;
   background-color: var(--color-content);

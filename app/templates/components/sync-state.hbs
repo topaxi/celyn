@@ -8,7 +8,7 @@
       )
     }}
 {{else if sync.isSyncing}}
-  <celyn-sync-state class="layout-column">
+  <celyn-sync-state class="layout-column" style={{progressStyle}}>
     <div class="progress layout-row">
       <span>Syncing:</span>
       <span class="processed">{{sync.syncProcessed}}</span>

@@ -1,5 +1,15 @@
 celyn-sync-state {
-  height: 2.5em;
+  height: 2.25em;
+}
+
+celyn-sync-state::before {
+  content: '';
+  position: absolute;
+  left: 0; right: 0; bottom: 0;
+  height: 1px;
+  background-image: linear-gradient(to left, var(--color-secondary), var(--color-secondary));
+  background-repeat: no-repeat;
+  background-size: var(--progress, 0px);
 }
 
 celyn-sync-state .processed {
@@ -12,6 +22,7 @@ celyn-sync-state .separator::before {
 }
 
 celyn-sync-state .current-file {
+  font-size: 0.85em;
   text-overflow: ellipsis;
   overflow: hidden;
   white-space: nowrap;
