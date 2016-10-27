@@ -29,10 +29,6 @@ export default Service.extend({
   audioMeta: inject.service(),
   store: inject.service(),
 
-  _artists: new Map,
-  _albums: new Map,
-  _genres: new Map,
-
   _isAudioFile(fileName) {
     return fileName.endsWith('.mp3') ||
            fileName.endsWith('.m4a') ||
