@@ -4,9 +4,18 @@ const { Route, inject } = Ember
 
 export default Route.extend({
   sync: inject.service(),
+  cordova: inject.service(),
 
   beforeModel() {
-    this.get('sync').syncLocalFiles()
+    return this.get('cordova').ready()
+      .then(() => {
+        if (typeof StatusBar !== 'undefined') {
+          StatusBar.backgroundColorByHexString('#1c1c1c')
+        }
+      })
+      .then(() => {
+        this.get('sync').syncLocalFiles()
+      })
   },
 
   model() {
