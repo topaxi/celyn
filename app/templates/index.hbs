@@ -1,6 +1,6 @@
 {{#vertical-collection
   class = "track-list flex"
-  items = model
+  items = (sort-by 'artist' 'album' 'title' model)
   itemClassNames = "box primary"
   defaultHeight = 48
   alwaysRemeasure = true
