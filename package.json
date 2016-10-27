@@ -12,11 +12,14 @@
     "start": "ember server",
     "test": "ember test"
   },
-  "repository": "",
-  "engines": {
-    "node": ">= 0.10.0"
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/topaxi/celyn.git"
   },
-  "author": "",
+  "engines": {
+    "node": ">= 6.0.0"
+  },
+  "author": "Damian Senn <damian.senn@topaxi.codes>",
   "license": "MIT",
   "devDependencies": {
     "broccoli-asset-rev": "^2.4.2",
