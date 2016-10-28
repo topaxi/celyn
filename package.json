@@ -13,7 +13,7 @@
     "test": "ember test",
     "start-app": "adb shell am start -n codes.topaxi.celyn/codes.topaxi.celyn.MainActivity",
     "clean-app-data": "adb shell pm clear codes.topaxi.celyn",
-    "clean-restart": "npm run clear-app-data && npm run start-app"
+    "clean-restart": "npm run clean-app-data && npm run start-app"
   },
   "repository": {
     "type": "git",
