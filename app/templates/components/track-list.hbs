@@ -1,0 +1,9 @@
+{{#vertical-collection
+  class = "track-list flex"
+  items = tracks
+  itemClassNames = "box primary"
+  defaultHeight = 48
+  alwaysRemeasure = true
+  as |track|}}
+  {{track-list-item track=track click=(route-action 'play' track tracks)}}
+{{/vertical-collection}}

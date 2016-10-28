@@ -1,12 +1,29 @@
-<div class="celyn-player-cover">
-  {{md-icon "music note" inactive=true}}
-</div>
-<div class="celyn-player-track">
-  <div class="celyn-player-name">Yesterdays</div>
-  <div class="celyn-player-artist">Pennywise</div>
-</div>
+{{#if currentTrack}}
+  <div class="celyn-player-cover">
+    {{#if currentTrack.picture}}
+      <img src={{currentTrack.pictureURL}}>
+    {{else}}
+      {{md-icon "music note" inactive=true}}
+    {{/if}}
+  </div>
+  <div class="celyn-player-track">
+    <div class="celyn-player-track-title">{{currentTrack.title}}</div>
+    <div class="celyn-player-track-artist">{{currentTrack.artist}}</div>
+  </div>
+{{/if}}
 <div class="celyn-player-controls">
-  {{md-icon "skip previous"}}
-  {{md-icon (if isPlaying "pause" "play arrow")}}
-  {{md-icon "skip next"}}
+  <button type="button" onclick={{action 'previous'}}>
+    {{~md-icon "skip previous"~}}
+  </button>
+  <button type="button" onclick={{action 'togglePause'}}>
+    {{component
+      (if isPlaying
+        (component 'md-icon' 'pause')
+        (component 'md-icon' 'play arrow')
+        )
+      }}
+  </button>
+  <button type="button" onclick={{action 'next'}}>
+    {{~md-icon "skip next"~}}
+  </button>
 </div>

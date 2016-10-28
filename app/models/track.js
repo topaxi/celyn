@@ -22,9 +22,23 @@ export default Model.extend({
   track: attr('object'),
   year: attr('string'),
 
-  pictures: attr('attachment', {
+  pictures: attr('attachments', {
     defaultValue() {
       return []
     }
+  }),
+
+  picture: computed('pictures.[]', function() {
+    return this.get('pictures')[0]
+  }),
+
+  pictureURL: computed('picture', function() {
+    let picture = this.get('picture')
+
+    if (!picture) {
+      return null
+    }
+
+    return URL.createObjectURL(picture.data)
   })
 })

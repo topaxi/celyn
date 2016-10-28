@@ -5,6 +5,7 @@ const { Route, inject } = Ember
 export default Route.extend({
   sync: inject.service(),
   cordova: inject.service(),
+  player: inject.service('celyn-player'),
 
   beforeModel() {
     return this.get('cordova').ready()
@@ -16,5 +17,12 @@ export default Route.extend({
       .then(() => {
         this.get('sync').syncLocalFiles()
       })
+  },
+
+  actions: {
+    play(track, playlist) {
+      this.set('player.currentPlaylist', playlist)
+      this.get('player').play(track)
+    }
   }
 })

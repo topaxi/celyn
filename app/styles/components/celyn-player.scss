@@ -15,18 +15,30 @@ celyn-player {
   margin: 0.5rem;
 }
 
+.celyn-player-cover > img {
+  max-width: 100%;
+  max-height: 100%;
+}
+
 .celyn-player-track {
   flex: 1;
   font-size: 0.9rem;
 }
 
-.celyn-player-artist {
+.celyn-player-track-artist {
   font-size: 0.75em;
 }
 
 .celyn-player-controls {
+  margin-left: auto;
   margin-right: 1rem;
   display: flex;
   justify-content: space-between;
   width: 120px;
+}
+
+.celyn-player-controls > button {
+  border: none;
+  outline: none;
+  background: none;
 }
