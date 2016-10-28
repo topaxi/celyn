@@ -46,10 +46,20 @@ export default Service.extend({
 
   syncLocalFiles(reindex) {
     this.set('isSyncing', true)
+    console.groupCollapsed('file sync')
     console.time('file sync')
 
+    console.groupCollapsed('get current state')
+    console.time('get current state')
+    console.time('search audio files')
+    console.time('fetch synced tracks')
     let syncState = Promise.all([
       this._getAllFiles()
+        .then(files => {
+          console.timeEnd('search audio files')
+
+          return files
+        })
         .then(files => this._filterAudioFiles(files))
         .then(files => {
           this.setProperties({
@@ -60,12 +70,35 @@ export default Service.extend({
           return files
         }),
       this.get('store').findAll('track')
+        .then(tracks => {
+          console.timeEnd('fetch synced tracks')
+
+          return tracks
+        })
     ])
 
     return syncState
+      .then(state => {
+        console.groupEnd('get current state')
+        console.timeEnd('get current state')
+
+        return state
+      })
       .then(([ files ]) => files)
-      .then(files => forEachPromise(files, f => this._syncTrack(f, reindex)))
-      .then(() => console.timeEnd('file sync'))
+      .then(files => {
+        console.groupCollapsed(`sync ${files.length} tracks`)
+        console.time(`sync ${files.length} tracks`)
+
+        return forEachPromise(files, f => this._syncTrack(f, reindex))
+          .then(() => {
+            console.groupEnd(`sync ${files.length} tracks`)
+            console.timeEnd(`sync ${files.length} tracks`)
+          })
+      })
+      .then(() => {
+        console.groupEnd('file sync')
+        console.timeEnd('file sync')
+      })
       .finally(() => this.set('isSyncing', false))
   },
 
@@ -83,7 +116,8 @@ export default Service.extend({
   },
 
   _syncTrack(fileEntry, force) {
-    console.time(fileEntry.nativeURL)
+    console.groupCollapsed(fileEntry.name)
+    console.time('total')
 
     this.set('syncCurrentFile', fileEntry.name)
 
@@ -91,11 +125,14 @@ export default Service.extend({
     let store = this.get('store')
     let audioMeta = this.get('audioMeta')
 
+    console.time('peek record')
     let track = store.peekRecord('track', id)
+    console.timeEnd('peek record')
 
     let done = () => {
       this.set('syncProcessed', this.get('syncProcessed') + 1)
-      console.timeEnd(fileEntry.nativeURL)
+      console.groupEnd(fileEntry.name)
+      console.timeEnd('total')
     }
 
     if (track && !force) {
@@ -104,12 +141,16 @@ export default Service.extend({
       return track
     }
 
+    console.time('read metadata')
+
     return audioMeta.readMetaData(fileEntry)
       .then(meta => {
+        console.timeEnd('read metadata')
         if (!track) {
           track = store.createRecord('track', { id })
         }
 
+        console.time('update properties')
         track.setProperties({
           title: meta.title,
           artist: meta.artist.join(', '),
@@ -130,7 +171,15 @@ export default Service.extend({
           })
         })
 
+        console.timeEnd('update properties')
+        console.time('save')
+
         return track.save()
+          .then(t => {
+            console.timeEnd('save')
+
+            return t
+          })
       })
       .then(() => done())
   },
