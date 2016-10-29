@@ -5,6 +5,8 @@ import RSVP from 'rsvp'
 const { Service } = Ember
 const { Promise } = RSVP
 
+const SD_CARD_TOPAXI_S6 = 'file:///storage/4E21-FF0C/'
+
 export default Service.extend({
   blobToArrayBuffer(blob) {
     return new Promise(resolve => {
@@ -23,6 +25,10 @@ export default Service.extend({
 
   getExternalRootDir() {
     return this.resolveLocalFileSystemURL(cordova.file.externalRootDirectory)
+  },
+
+  getSDCardDir() {
+    return this.resolveLocalFileSystemURL(SD_CARD_TOPAXI_S6)
   },
 
   readDir(entry) {

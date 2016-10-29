@@ -199,7 +199,21 @@ export default Service.extend({
   _getAllFiles() {
     let fs = this.get('fs')
 
-    return fs.getExternalRootDir()
-      .then(dir => fs.readDirR(dir))
+    let rootDirs = [
+      fs.getExternalRootDir(),
+      fs.getSDCardDir()
+        .catch(() => null)
+    ]
+
+    let themFiles = []
+
+    return Promise.all(rootDirs)
+      .then(dirs =>
+        Promise.all(
+          dirs.filter(i => i)
+              .map(dir => fs.readDirR(dir, themFiles))
+        )
+      )
+      .then(() => themFiles)
   }
 })
