@@ -2449,9 +2449,9 @@ ember-composable-helpers@^1.1.2:
     broccoli-funnel "^1.0.1"
     ember-cli-babel "^5.1.6"
 
-ember-cordova@0.3.5:
-  version "0.3.5"
-  resolved "https://registry.yarnpkg.com/ember-cordova/-/ember-cordova-0.3.5.tgz#8dde4f5163c0ccb11472581df3c4eadcf1bda63c"
+ember-cordova@0.3.6:
+  version "0.3.6"
+  resolved "https://registry.yarnpkg.com/ember-cordova/-/ember-cordova-0.3.6.tgz#057685c912def8caee3faf20150499a0ed6aaca2"
   dependencies:
     broccoli-funnel "^1.0.1"
     broccoli-merge-trees "^1.1.1"

@@ -44,7 +44,7 @@
     "ember-cli-test-loader": "^1.1.0",
     "ember-cli-uglify": "^1.2.0",
     "ember-composable-helpers": "^1.1.2",
-    "ember-cordova": "0.3.5",
+    "ember-cordova": "0.3.6",
     "ember-data": "^2.10.0-beta.2",
     "ember-elsewhere": "^0.4.1",
     "ember-export-application-global": "^1.0.5",
