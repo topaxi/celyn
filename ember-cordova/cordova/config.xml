@@ -37,7 +37,8 @@
     </plugin>
     <plugin name="cordova-plugin-statusbar" spec="~2.2.0" />
     <platform name="android">
-      <preference name="xwalkVersion" value="xwalk_core_library_beta:22.52.561.4" />
-      <preference name="android-targetSdkVersion" value="22" />
+        <preference name="xwalkVersion" value="xwalk_core_library_beta:22.52.561.4" />
+        <preference name="android-targetSdkVersion" value="22" />
     </platform>
+    <plugin name="cordova-plugin-media" spec="~2.4.0" />
 </widget>
