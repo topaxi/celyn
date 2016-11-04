@@ -23,3 +23,9 @@ ember-cordova/cordova/plugins/*
 !ember-cordova/cordova/plugins/.gitkeep
 ember-cordova/cordova/platforms/*
 !ember-cordova/cordova/platforms/.gitkeep
+
+# electron
+/celyn
+
+# yarn
+yarn-error.log*
