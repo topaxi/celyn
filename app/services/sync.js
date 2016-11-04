@@ -2,7 +2,7 @@
 import Ember from 'ember'
 import RSVP from 'rsvp'
 
-const { Service, Evented, inject, run } = Ember
+const { Service, Evented, inject } = Ember
 const { Promise } = RSVP
 
 function basename(path) {
@@ -109,7 +109,7 @@ export default Service.extend(Evented, {
       })
       .finally(() => {
         this.set('isSyncing', false)
-        run.later(() => this.trigger('end'), 300)
+        this.trigger('end')
       })
   },
 
