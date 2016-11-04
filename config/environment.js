@@ -4,7 +4,7 @@ module.exports = function(environment) {
   const ENV = {
     modulePrefix: 'celyn',
     environment,
-    rootURL: '/',
+    rootURL: null,
     locationType: 'hash',
     EmberENV: {
       EXTEND_PROTOTYPES: false,

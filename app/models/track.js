@@ -35,7 +35,7 @@ export default Model.extend({
   pictureURL: computed('picture', function() {
     let picture = this.get('picture')
 
-    if (!picture) {
+    if (!picture || !picture.size) {
       return null
     }
 

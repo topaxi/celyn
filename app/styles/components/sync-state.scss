@@ -1,5 +1,9 @@
 celyn-sync-state {
+  background: pink !important;
+}
 
+celyn-sync-state > .progress {
+  margin-bottom: 0.2rem;
 }
 
 celyn-sync-state .separator::before {

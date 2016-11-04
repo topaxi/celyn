@@ -5,5 +5,8 @@
   defaultHeight = 48
   alwaysRemeasure = true
   as |track|}}
-  {{track-list-item track=track click=(route-action 'play' track tracks)}}
+  <div onclick={{route-action 'play' track tracks}}>
+    <div>{{track.title}}</div>
+    <div><small>{{track.artist}}</small></div>
+  </div>
 {{/vertical-collection}}

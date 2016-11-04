@@ -29,6 +29,6 @@ export default Component.extend({
     let processed = this.get('sync.syncProcessed')
     let percent = 100 / total * processed
 
-    return htmlSafe(`--progress:${(percent || 0).toFixed(2)}%`)
+    return htmlSafe(`--progress:${(percent || 0).toFixed(1)}%`)
   })
 })

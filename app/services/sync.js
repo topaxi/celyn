@@ -2,8 +2,14 @@
 import Ember from 'ember'
 import RSVP from 'rsvp'
 
-const { Service, inject } = Ember
+const { Service, Evented, inject, run } = Ember
 const { Promise } = RSVP
+
+function basename(path) {
+  let parts = path.split('/')
+
+  return parts[parts.length - 1]
+}
 
 function forEachPromise(array, callback) {
   return array.reduce(
@@ -26,7 +32,7 @@ function forEachPromise(array, callback) {
 //   .then(() => a)
 // }
 
-export default Service.extend({
+export default Service.extend(Evented, {
   fs: inject.service(),
   audioMeta: inject.service(),
   store: inject.service(),
@@ -35,6 +41,8 @@ export default Service.extend({
   syncTotal: 0,
   syncProcessed: 0,
   syncCurrentFile: '',
+
+  _adapterOptions: { subscribe: false },
 
   _isAudioFile(fileName) {
     return fileName.endsWith('.mp3') ||
@@ -99,7 +107,10 @@ export default Service.extend({
         console.groupEnd('file sync')
         console.timeEnd('file sync')
       })
-      .finally(() => this.set('isSyncing', false))
+      .finally(() => {
+        this.set('isSyncing', false)
+        run.later(() => this.trigger('end'), 300)
+      })
   },
 
   _formatToMime(f) {
@@ -115,13 +126,15 @@ export default Service.extend({
     }
   },
 
-  _syncTrack(fileEntry, force) {
-    console.groupCollapsed(fileEntry.name)
+  _syncTrack(filePath, force) {
+    let name = basename(filePath)
+
+    console.groupCollapsed(name)
     console.time('total')
 
-    this.set('syncCurrentFile', fileEntry.name)
+    this.set('syncCurrentFile', name)
 
-    let id = fileEntry.nativeURL
+    let id = filePath
     let store = this.get('store')
     let audioMeta = this.get('audioMeta')
 
@@ -131,7 +144,7 @@ export default Service.extend({
 
     let done = () => {
       this.set('syncProcessed', this.get('syncProcessed') + 1)
-      console.groupEnd(fileEntry.name)
+      console.groupEnd(name)
       console.timeEnd('total')
     }
 
@@ -143,7 +156,7 @@ export default Service.extend({
 
     console.time('read metadata')
 
-    return audioMeta.readMetaData(fileEntry)
+    return audioMeta.readMetaData(filePath)
       .then(meta => {
         console.timeEnd('read metadata')
         if (!track) {
@@ -174,9 +187,10 @@ export default Service.extend({
         console.timeEnd('update properties')
         console.time('save')
 
-        return track.save()
+        return track.save({ adapterOptions: this._adapterOptions })
           .then(t => {
             console.timeEnd('save')
+            console.log(t.toJSON())
 
             return t
           })
@@ -193,27 +207,36 @@ export default Service.extend({
   },
 
   _filterAudioFiles(files) {
-    return files.filter(f => this._isAudioFile(f.name))
+    return files.filter(f => this._isAudioFile(f))
+  },
+
+  _getSyncDirectories() {
+    let fs = this.get('fs')
+
+    return window.cordova ? // eslint-disable-line no-nested-ternary
+      [
+        fs.getExternalRootDir(),
+        fs.getSDCardDir()
+          .catch(() => null)
+      ] :
+      window.requireNode ?
+        [
+          '/home/dsenn/Music'
+        ] :
+        [
+        ]
   },
 
   _getAllFiles() {
     let fs = this.get('fs')
 
-    let rootDirs = [
-      fs.getExternalRootDir(),
-      fs.getSDCardDir()
-        .catch(() => null)
-    ]
-
-    let themFiles = []
-
-    return Promise.all(rootDirs)
+    return Promise.all(this._getSyncDirectories())
       .then(dirs =>
         Promise.all(
           dirs.filter(i => i)
-              .map(dir => fs.readDirR(dir, themFiles))
+              .map(dir => fs.readDirR(dir))
         )
       )
-      .then(() => themFiles)
+      .then(dirs => dirs.reduce((a, b) => a.concat(b)))
   }
 })
