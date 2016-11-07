@@ -191,6 +191,7 @@ export default Service.extend(Evented, {
           .then(t => {
             console.timeEnd('save')
             console.log(t.toJSON())
+            this.trigger('saved', track)
 
             return t
           })
