@@ -36,6 +36,7 @@ export default Service.extend(Evented, {
   fs: inject.service(),
   audioMeta: inject.service(),
   store: inject.service(),
+  electron: inject.service(),
 
   isSyncing: false,
   syncTotal: 0,
@@ -214,13 +215,13 @@ export default Service.extend(Evented, {
   _getSyncDirectories() {
     let fs = this.get('fs')
 
-    return window.cordova ? // eslint-disable-line no-nested-ternary
+    return this.get('cordova.isCordova') ? // eslint-disable-line no-nested-ternary
       [
         fs.getExternalRootDir(),
         fs.getSDCardDir()
           .catch(() => null)
       ] :
-      window.requireNode ?
+      this.get('electron.isElectron') ?
         [
           '/home/dsenn/Music'
         ] :
