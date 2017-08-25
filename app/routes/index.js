@@ -11,7 +11,8 @@ export default Route.extend({
   },
 
   activate() {
-    let saved = 0;
+    let saved = 0
+
     this.get('sync').on('end', () => this.refresh())
     this.get('sync').on('saved', () => !(++saved % 200) && this.refresh())
   },

@@ -39,14 +39,12 @@ export default Service.extend(Evented, {
   },
 
   _handleMediaStatus(status) {
-    console.log({ status })
     switch (status) {
       case Media.MEDIA_NONE:
         break
       case Media.MEDIA_STARTING:
         break
       case Media.MEDIA_RUNNING:
-        console.log('media is running, setting isPlaying to true')
         this.set('isPlaying', true)
         break
       case Media.MEDIA_PAUSED:

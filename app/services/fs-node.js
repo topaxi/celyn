@@ -1,7 +1,6 @@
 /* eslint-env node */
 /* global requireNode */
 import Ember from 'ember'
-import RSVP from 'rsvp'
 
 const denodeify = requireNode('denodeify')
 const nodeDir = requireNode('node-dir')
